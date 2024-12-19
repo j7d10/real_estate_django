@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="card mb-3" style="background-color: #ffffff; border-radius: 20px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
+     <div class="row g-0">
+       <div>
+           <div class="card-body" style="padding: 2rem; background-image: linear-gradient(to bottom, #ffffff, #f0f0f0);">
+               <h5 class="card-title" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: bold; color: #333; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);">
+                   Login
+               </h5>
+                   {% if error %}
+                     <div class="alert alert-danger mt-3" role="alert" style="background-color: #c0392b; color: #fff; border-radius: 10px;">
+                     {{ error }}
+                    </div>
+                  {% endif %}
+                   <p class="card-text" style="color: #555;">
+                   <form method="POST" style="background-color: #ffffff; padding: 1.5rem; border-radius: 10px; border: 1px solid #ddd;">
+                         {% csrf_token %}
+                         {{ form.as_p }}
+                          <button type="submit" class="btn btn-primary" style="background-color: #2980b9; color: #fff; border-radius: 10px; padding: 10px 20px; font-size: 1.1rem; border: none; transition: background-color 0.3s, transform 0.3s;">
+                           Login
+                           </button>
+                   </form>
+                   </p>
+                   </div>
+           </div>
+       </div>
+</div>
+
+<style>
+  .btn-primary:hover {
+      background-color: #1c6699 !important;
+      transform: translateY(-2px);
+  }
+  
+  .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-body {
+      border-radius: 15px;
+  }
+
+  h5 {
+      margin-bottom: 1rem;
+  }
+
+  input {
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 100%;
+      transition: border-color 0.3s;
+  }
+
+  input:focus {
+      border-color: #2980b9;
+      outline: none;
+      box-shadow: 0 0 5px rgba(41, 128, 185, 0.5);
+  }
+</style>
+{% endblock content %}
