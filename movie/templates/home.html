@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+      <form action="" style="max-width: 500px; margin: 40px auto; padding: 20px; background-color: #f7f7f7; border: 1px solid #eee; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div class="mb-3">
+          <label class="form-label" style="font-weight: bold; font-size: 22px; color: #333; margin-bottom: 10px;">Search For Desired City:</label>
+          <input type="text" class="form-control" name="searchMovie" style="height: 60px; font-size: 22px; padding: 20px; border: 1px solid #ddd; border-radius: 15px; background-color: #fff;">
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 60px; font-size: 22px; padding: 20px; border: none; border-radius: 15px; background-color: #64b5f6; color: #fff; cursor: pointer; transition: background-color 0.2s ease;">Submit</button>
+      </form>
+      <span style="display: block; text-align: center; font-size: 22px; margin-top: 20px; color: #666; font-weight: bold;">Showing Results For: {{ searchTerm }}</span>
+      
+
+          <br/>
+          <br/>
+         
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for movie in movies %}
+            <div class="col">
+              <div class="card" style="width: 25rem; display: inline-block; margin: 1rem; transition: 0.3s; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);">
+                  <img class="card-img-top" src="{{movie.image.url}}" alt="Card image cap" style="height: 250px; object-fit: cover; width: 100%;">
+                  <div class="card-body">
+                      <a href="{% url 'detail' movie.id %}" style="text-decoration: none; color: inherit;">
+                          <h5 class='card-title fw-bold'>{{movie.title}}</h5>
+                      </a>
+                      <p class="card-text">{{movie.description}}</p>
+                  </div>
+              </div>
+              <style>
+                  .card:hover {
+                      box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.4);
+                      transform: translateY(-10px) scale(1.05);
+                      background-color: #f7f7f7;
+                      border: 1px solid #ccc;
+                  }
+              </style>
+          </div>
+            {% endfor %}
+        </div>
+           
+          <br/>
+          <br/>
+<br> <br>
+
+          <h2 style="font-family: Playfair Display; font-size: 36px; color: #333; text-align: center;">Subscribe For Trending Deals</h2>
+<form action={% url 'signup' %}>
+  <div class="form-container" style="background-color: #F7F4E9; padding: 30px; border: 1px solid #C9C4B5; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <label for='email' class="form-label" style="font-family: Georgia; font-size: 18px; color: #666;">Enter your Email Address:</label>
+    <input type="email" class="form-control" name="email" style="font-family: Georgia; font-size: 18px; padding: 10px; border: 1px solid #C9C4B5; border-radius: 5px;"/><br>
+    <button type="submit" class="btn btn-primary" style="background-color: #8B9467; color: #FFFFFF; padding: 10px 20px; border: none; border-radius: 5px; font-family: Playfair Display; font-size: 18px;">Join the Ranks</button>
+  </div>
+</form>
+    </div>
+{% endblock content %}

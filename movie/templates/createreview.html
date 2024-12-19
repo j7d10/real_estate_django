@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="card mb-3" style="background-color: #f7f7f7; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div class="row g-0">
+            <div class="col-md-12">
+                <div class="card-body" style="padding: 2rem; background-image: linear-gradient(to bottom, #f7f7f7, #fff);">
+                    <h5 class="card-title text-center" style="font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: bold; color: #333; text-decoration: underline; text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        Add Review for {{ movie.title }}
+                    </h5>
+                    {% if error %}
+                    <div class="alert alert-danger mt-3" role="alert" style="background-color: #ff0000; color: #fff; border: none; padding: 1rem; font-size: 1rem; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        {{ error }}
+                    </div>
+                    {% endif %}
+                    <p class="card-text text-center">
+                    <form method="POST" style="display: flex; flex-direction: column; align-items: center;">
+                    {% csrf_token %}
+                    <div class="form-control" style="margin-bottom: 1rem; padding: 1rem; border: 1px solid #ddd; border-radius: 10px; background-color: #fff; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        <textarea name="myreview" rows='4' cols="50" style="width: 100%; padding: 1rem; font-size: 1rem; border: none; resize: vertical;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="background-color: #333; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 1rem; border-radius: 10px; cursor: pointer; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        Add Review
+                    </button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

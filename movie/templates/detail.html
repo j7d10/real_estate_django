@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br><br>
+<div class="container">
+    <div class="card mb-3" style="background-color: #f7f7f7; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ movie.image.url }}" class="img-fluid rounded-start" alt="" style="border-radius: 20px 0 0 20px;">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body" style="padding: 2rem;">
+                    <h5 class="card-title text-center" style="font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: bold; color: #333;">{{ movie.title }}</h5>
+                    <p class="card-text text-center" style="font-size: 1.2rem; color: #666;">{{ movie.description }}</p>
+                    <p class="card-text text-center">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'createreview' movie.id %}" class="btn btn-primary" style="background-color: #333; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 1rem; border-radius: 10px;">
+                        Add Review
+                    </a>
+                    {% endif %}
+                    </p>
+
+                    <hr style="border: none; border-top: 1px solid #ddd; margin: 2rem 0;" />
+                    <h3 class="text-center" style="font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; color: #333;">Reviews</h3>
+                    <ul class="list-group" style="list-style: none; padding: 0; margin: 0;">
+                    {% for review in reviews %}
+                        <li class="list-group-item pb-3 pt-3" style="border-bottom: 1px solid #ddd; padding: 1rem;">
+                            <h5 class="card-title text-center" style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: bold; color: #333;">
+                                Review by {{ review.user.username }}
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted text-center" style="font-size: 1rem; color: #666;">{{ review.date }}</h6>
+                            <p class="card-text text-center" style="font-size: 1rem; color: #666;">{{ review.text }}</p>
+                            {% if user.is_authenticated and user == review.user %}
+                            <a class="btn btn-primary me-2" href="{% url 'updatereview' review.id %}" style="background-color: #333; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 1rem; border-radius: 10px;">
+                                Update
+                            </a>
+                            <a class="btn btn-danger" href="{% url 'deletereview' review.id %}" style="background-color: #ff0000; color: #fff; border: none; padding: 0.5rem 1rem; font-size: 1rem; border-radius: 10px;">
+                                Delete
+                            </a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
